@@ -34,6 +34,9 @@
       "path": "../../feedback/message-feedback"
     },
     {
+      "path": "../../banma/skills-workbench"
+    },
+    {
       "path": "../../host/plugin-inventory"
     },
     {

@@ -37,7 +37,7 @@ PID_FILE="$PROJECT_DIR/.dsh-service.pid"
 LOG_FILE="$PROJECT_DIR/.dsh-service.log"
 PORT_FILE="$PROJECT_DIR/.dsh-service.port"
 HOST="127.0.0.1"
-DEFAULT_PORT=3080
+DEFAULT_PORT=8888
 PORT="$DEFAULT_PORT"                         # effective port (see resolve_port)
 BUILD_SENTINEL="$PROJECT_DIR/apps/cli/lib"   # exists after a successful build
 

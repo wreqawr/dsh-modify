@@ -28,6 +28,10 @@ mise.toml
 .dsh-service.pid
 .dsh-service.log
 .dsh-service.port
+# service.sh 并行实例的运行期文件（文件名带空格变体）
+.dsh-service *.pid
+.dsh-service *.log
+.dsh-service *.port
 dist-exe/
 python/sdk-runtime/src/deepseek_harness_runtime/runtime/dsh-jsonrpc-agent-*
 python/sdk-runtime/src/deepseek_harness_runtime/runtime/node/

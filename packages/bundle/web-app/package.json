@@ -73,6 +73,8 @@
     "@deepseek-ai/dsh-client-ui-settings-general": "workspace:^",
     "@deepseek-ai/dsh-client-ui-sidebar": "workspace:^",
     "@deepseek-ai/dsh-client-ui-skill": "workspace:^",
+    "@deepseek-ai/dsh-client-banma-skills-workbench": "workspace:^",
+    "@deepseek-ai/dsh-banma-skills-workbench": "workspace:^",
     "@deepseek-ai/dsh-client-ui-input-trigger": "workspace:^",
     "@deepseek-ai/dsh-client-ui-subagent": "workspace:^",
     "@deepseek-ai/dsh-client-ui-jobs": "workspace:^",

@@ -63,8 +63,6 @@ const PWSH_CONFIG = fileURLToPath(new URL('./pwsh.cordis.yml', import.meta.url))
 const BACKGROUND_TASK_ADMISSION_CONFIG = fileURLToPath(
   new URL('../background-job-admission.cordis.yml', import.meta.url),
 )
-const PRODUCT_SUBAGENT_CODEX_CONFIG = fileURLToPath(new URL('../product-subagent-codex.cordis.yml', import.meta.url))
-const PRODUCT_SUBAGENT_BOTH_CONFIG = fileURLToPath(new URL('../product-subagent-both.cordis.yml', import.meta.url))
 const FS_DIFF_BOUND_CONFIG = fileURLToPath(new URL('./fs-diff-bound.cordis.yml', import.meta.url))
 const SNAPSHOTS_DIR = join(dirname(fileURLToPath(import.meta.url)), 'snapshots')
 const PACKED_CHUNKS_SOURCE = 'hook-cc-pretool-deny'
@@ -140,23 +138,6 @@ const SCENARIOS: Scenario[] = [
   // reuse the stable text-turn transcript so only Loader-composed headers and
   // tool sidecars vary. Model output and usage are not evidence here, so record
   // mode must not replace them with live-API output.
-  {
-    name: 'product-subagent-codex',
-    hasModelTurn: true,
-    recorded: false,
-    pinsHeader: true,
-    headerClass: 'product-subagent-codex',
-    configPath: PRODUCT_SUBAGENT_CODEX_CONFIG,
-  },
-  {
-    name: 'product-subagent-both',
-    hasModelTurn: true,
-    recorded: false,
-    pinsHeader: true,
-    headerClass: 'product-subagent-both',
-    systemPromptSource: 'product-subagent-codex',
-    configPath: PRODUCT_SUBAGENT_BOTH_CONFIG,
-  },
   {
     name: 'session-title-after-turn',
     hasModelTurn: true,
@@ -510,32 +491,7 @@ const SCENARIOS: Scenario[] = [
     headerClass: 'advanced',
     configPath: ADVANCED_CONFIG,
   },
-  // Prompt-submit blocks are authored keylessly with malformed matcher fields,
-  // which these matcherless events must ignore. Admission rejects before a turn
-  // opens, so only the ACP stop reason is observable and no log is harvested.
-  { name: 'hook-cc-promptsubmit-block', hasModelTurn: false, recorded: false },
-  { name: 'hook-codex-promptsubmit-block', hasModelTurn: false, recorded: false },
-  // Each invalid matcher follows a runnable prompt blocker. Reaching the replay
-  // model without any hook audit rows proves config loading is atomic through
-  // the real Loader/app path, rather than retaining the earlier valid group.
-  { name: 'hook-cc-invalid-matcher', hasModelTurn: true, recorded: false },
-  { name: 'hook-codex-invalid-matcher', hasModelTurn: true, recorded: false },
-  // The mid-turn interception points fire during a real model turn, so each is recorded with its hook active
-  // (the model's reaction to a deny/block/force-continue is part of the captured transcript).
-  // SessionStart/SubagentStart are excluded because detached injection races log
-  // order; SubagentStop writes no transcript, so an expected output could not prove it ran.
-  // Unit tests cover those points; the hook-snapshot-matrix Agent Note owns the rationale.
-  { name: 'hook-cc-promptsubmit-context', hasModelTurn: true, recorded: true },
-  { name: 'hook-cc-pretool-deny', hasModelTurn: true, recorded: true },
-  { name: 'hook-cc-pretool-ask', hasModelTurn: true, recorded: true },
-  { name: 'hook-cc-posttool-block', hasModelTurn: true, recorded: true },
-  { name: 'hook-cc-posttool-context', hasModelTurn: true, recorded: true },
-  { name: 'hook-cc-stop-continue', hasModelTurn: true, recorded: true },
-  { name: 'hook-codex-promptsubmit-context', hasModelTurn: true, recorded: true },
-  { name: 'hook-codex-pretool-block', hasModelTurn: true, recorded: true },
-  { name: 'hook-codex-posttool-block', hasModelTurn: true, recorded: true },
-  { name: 'hook-codex-posttool-context', hasModelTurn: true, recorded: true },
-  { name: 'hook-codex-stop-continue', hasModelTurn: true, recorded: true },
+  // The mid-turn hook interception points were removed with the hooks feature.
   // Code Mode: the registry in `mode: code` — the wire tool list collapses to [run_code], the
   // tools:sdk section rides in the prompt, and the program's tool calls land as
   // tool/code-dispatch events. Each overlay composes and pins its own header class.

@@ -94,6 +94,12 @@
     - id: plugin-inventory
       name: '@deepseek-ai/dsh-host-plugin-inventory'
 
+    # Skills-workbench file tree: the Remote domain serving directory listing
+    # and file/folder mutation for the sidebar tree (client side is the
+    # banma-skills-workbench roster row).
+    - id: banma-skills-workbench-service
+      name: '@deepseek-ai/dsh-banma-skills-workbench'
+
     # The API gateway: the transport-agnostic dispatch face every client shape
     # shares. The base layer's agent-default-model service owns the default model.
     - id: api-gateway
@@ -229,6 +235,14 @@
 
     - id: ui-skill
       name: '@deepseek-ai/dsh-client-ui-skill'
+
+    # Skills workbench: the left sidebar is replaced by the skill catalog plus
+    # the activated skills' system prompts, and the right details column by the
+    # live skill-execution trace. Client-only: the catalog rides the connection
+    # skill.list RPC, and the trace derives from the session conversation
+    # snapshot, so no host row exists for it.
+    - id: banma-skills-workbench
+      name: '@deepseek-ai/dsh-client-banma-skills-workbench'
 
     - id: ui-subagent
       name: '@deepseek-ai/dsh-client-ui-subagent'
